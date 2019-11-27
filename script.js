@@ -1,34 +1,54 @@
-// Use class to interact with DOM elements
+function isTouching(a, b) {
+	const aRect = a.getBoundingClientRect();
+	const bRect = b.getBoundingClientRect();
 
-// A constructor function gets called immediately
-// whenever we create a new instance of a class
-
-// inside the constructor, first we create references to the DOM elements so our class has a way to handle them.
-
-class Timer {
-	constructor(durationInput, startButton, pauseButton) {
-		this.durationInput = durationInput;
-		this.startButton = startButton;
-		this.pauseButton = pauseButton;
-
-		// bind event listener to previously referenced DOM element
-		this.startButton.addEventListener("click", this.start);
-	}
-
-	// define method inside class
-	start() {
-		console.log("Time to start the timer!");
-	}
+	return !(
+		aRect.top + aRect.height < bRect.top ||
+    aRect.top > bRect.top + bRect.height ||
+    aRect.left + aRect.width < bRect.left ||
+    aRect.left > bRect.left + bRect.width
+	);
 }
 
-// 1. create actual elements in HTML
-// 2. select elements using querySelector
+const init = () => {
+	const avatar = document.querySelector("#player");
+	const coin = document.querySelector("#coin");
+	moveCoin();
+	window.addEventListener("keyup", function(e) {
+		if (e.key === "ArrowDown" || e.key === "Down") {
+			moveVertical(avatar, 50);
+		} else if (e.key === "ArrowUp" || e.key === "Up") {
+			moveVertical(avatar, -50);
+		} else if (e.key === "ArrowRight" || e.key === "Right") {
+			moveHorizontal(avatar, 50);
+			avatar.style.transform = "scale(1,1)";
+		} else if (e.key === "ArrowLeft" || e.key === "Left") {
+			moveHorizontal(avatar, -50);
+			avatar.style.transform = "scale(-1,1)";
+		}
+		if (isTouching(avatar, coin)) moveCoin();
+	});
+};
 
-const durationInput = document.querySelector("#duration");
-const startButton = document.querySelector("#start");
-const pauseButton = document.querySelector("#pause");
+const moveVertical = (element, amount) => {
+	const currTop = extractPos(element.style.top);
+	element.style.top = `${currTop + amount}px`;
+};
+const moveHorizontal = (element, amount) => {
+	const currLeft = extractPos(element.style.left);
+	element.style.left = `${currLeft + amount}px`;
+};
 
-// 3. create Timer instance
-const timer = new Timer(durationInput, startButton, pauseButton);
+const extractPos = (pos) => {
+	if (!pos) return 100;
+	return parseInt(pos.slice(0, -2));
+};
 
-// now that we have created our timer instance, the class Timer will instantiate/bind the event listener automatically
+const moveCoin = () => {
+	const x = Math.floor(Math.random() * window.innerWidth);
+	const y = Math.floor(Math.random() * window.innerHeight);
+	coin.style.top = `${y}px`;
+	coin.style.left = `${x}px`;
+};
+
+init();
