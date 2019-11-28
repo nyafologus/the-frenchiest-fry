@@ -11,22 +11,22 @@ function isTouching(a, b) {
 }
 
 const init = () => {
-	const avatar = document.querySelector("#player");
-	const coin = document.querySelector("#coin");
-	moveCoin();
+	const hydra = document.querySelector("#hydra");
+	const fries = document.querySelector("#fries");
+	moveFries();
 	window.addEventListener("keyup", function(e) {
 		if (e.key === "ArrowDown" || e.key === "Down") {
-			moveVertical(avatar, 50);
+			moveVertical(hydra, 50);
 		} else if (e.key === "ArrowUp" || e.key === "Up") {
-			moveVertical(avatar, -50);
+			moveVertical(hydra, -50);
 		} else if (e.key === "ArrowRight" || e.key === "Right") {
-			moveHorizontal(avatar, 50);
-			avatar.style.transform = "scale(1,1)";
+			moveHorizontal(hydra, 50);
+			hydra.style.transform = "scale(1,1)";
 		} else if (e.key === "ArrowLeft" || e.key === "Left") {
-			moveHorizontal(avatar, -50);
-			avatar.style.transform = "scale(-1,1)";
+			moveHorizontal(hydra, -50);
+			hydra.style.transform = "scale(-1,1)";
 		}
-		if (isTouching(avatar, coin)) moveCoin();
+		if (isTouching(hydra, fries)) moveFries();
 	});
 };
 
@@ -44,11 +44,11 @@ const extractPos = (pos) => {
 	return parseInt(pos.slice(0, -2));
 };
 
-const moveCoin = () => {
+const moveFries = () => {
 	const x = Math.floor(Math.random() * window.innerWidth);
 	const y = Math.floor(Math.random() * window.innerHeight);
-	coin.style.top = `${y}px`;
-	coin.style.left = `${x}px`;
+	fries.style.top = `${y}px`;
+	fries.style.left = `${x}px`;
 };
 
 init();
