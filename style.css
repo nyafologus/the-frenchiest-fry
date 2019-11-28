@@ -1,6 +1,11 @@
+body {
+  background: url("./tile.jpg");
+  background-size: 70px 70px;
+}
+
 img {
-  width: 16rem;
-  /* position: absolute; */
+  width: 200px;
+  position: absolute;
   top: 100px;
   left: 100px;
 }
