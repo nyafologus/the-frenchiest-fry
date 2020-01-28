@@ -1,3 +1,5 @@
+// this logic has already been provided
+
 function isTouching(a, b) {
   const aRect = a.getBoundingClientRect();
   const bRect = b.getBoundingClientRect();
@@ -11,10 +13,17 @@ function isTouching(a, b) {
 }
 
 const init = () => {
+  // select both items by their id
   const hydra = document.querySelector("#hydra");
   const fries = document.querySelector("#fries");
   moveFries();
+  // add an event for a keyup
+  // attach this event to the window instead of the 2 selected elements, so we can use the keys anywhere
+
+  // in most browsers arrow keys are not considered as keypresses
+  // so instead of a "keypress" event, we listen for a "keyup"
   window.addEventListener("keyup", function(e) {
+    console.log(e.key);
     if (e.key === "ArrowDown" || e.key === "Down" || e.keyCode === 83) {
       moveVertical(hydra, 50);
     } else if (e.key === "ArrowUp" || e.key === "Up" || e.keyCode === 87) {
@@ -34,6 +43,7 @@ const init = () => {
   });
 };
 
+/* move hydra and fries by adjusting two CSS properties: top and left */
 const moveVertical = (element, amount) => {
   const currTop = extractPos(element.style.top);
   element.style.top = `${currTop + amount}px`;
