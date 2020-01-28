@@ -94,8 +94,8 @@ const extractPos = pos => {
 
 const moveFries = () => {
   // pick random position to move the image of fries to
-  const x = Math.floor(Math.random() * window.innerWidth);
-  const y = Math.floor(Math.random() * window.innerHeight);
+  const x = Math.floor(Math.random() * window.innerWidth) / 1.1;
+  const y = Math.floor(Math.random() * window.innerHeight) / 1.1;
   fries.style.top = `${y}px`;
   fries.style.left = `${x}px`;
 };
