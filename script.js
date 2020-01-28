@@ -22,7 +22,7 @@ const init = () => {
 
   // in most browsers arrow keys are not considered as keypresses
   // so instead of a "keypress" event, we listen for a "keyup"
-  window.addEventListener("keyup", function(e) {
+  window.addEventListener("keydown", function(e) {
     console.log(e.key);
     if (e.key === "ArrowDown" || e.key === "Down" || e.keyCode === 83) {
       moveVertical(hydra, 50);
