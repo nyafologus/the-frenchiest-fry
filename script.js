@@ -54,7 +54,7 @@ const init = () => {
     // thus creating a never-ending, relentless pursuit of the frenchiest fry,
     // which can be interpreted as an analogy of an unfullfilled life,
     // where at some point one eventually needs to stop to reevaluate what is
-    // truly important in life and feel gratitude for what it has achieved.
+    // truly important in life and feel gratitude for all that's been achieved.
     if (isTouching(hydra, fries)) moveFries();
   });
 };
